@@ -1,36 +1,29 @@
 fn main() {
-    //declaration of a vector to hold data of a spcific type
-    let v0: Vec<i32> = Vec::new();
+    //iterating over an immutable vector
+    let v0 = vec![100, 73, 32];
 
-    //creating a vector without specifying the data type
-    let v1 = vec![1, 2, 3];
-
-    println!("the first vector is: {:?}", &v0);
-
-    println!("our second vector has the following data: {:?}", &v1);
-
-    //updating a vector
-    let mut v2 = vec![1, 2, 3];
-
-    v2.push(4);
-    v2.push(5);
-    v2.push(6);
-
-    println!("the updated vector has values: {:?}", v2);
-
-    //reading values of a vector
-    let v3 = vec![1, 2, 3, 4, 5];
-
-    //first method using index only
-    let third: &i32 = &v3[2];
-    println!("the third element in the vector is: {}", third);
-
-    //second method using get. this will not panic if we try accessing a value at an index that does not exist
-    let third1:Option<&i32> = v3.get(2);
-    match third1 {
-        Some(third1) => println!("the third value accessed by get is: {}", third1),
-        None => println!("no value found at index 3"),
+    for i in &v0 {
+     println!("{}",&i);
     }
 
+    //iterating over a mutable vector
+    let mut v1 = vec![100, 73, 32];
+    for i in &mut v1 {
+        *i += 10;
+        println!("{}",&i);
+    }
+
+    /* a vector only stores values of the same type. in case we need to store values of different types,
+    we have to use an enum. the enum type will be taken as the value type in the vector as shown below */
+    #[derive(Debug)]
+    enum SpreadsheetCell {
+        Int(i32),
+        Float(f64),
+        Text(String),
+    }
+
+    let row = vec![SpreadsheetCell::Int(3), SpreadsheetCell::Float(10.12), SpreadsheetCell::Text(String::from("blue"))];
+
+    println!("the contents of the vector that uses an enum to cover diferent data type values are: {:?}", &row);
 
 }
