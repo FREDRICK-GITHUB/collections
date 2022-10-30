@@ -18,4 +18,19 @@ fn main() {
 
     println!("the updated vector has values: {:?}", v2);
 
+    //reading values of a vector
+    let v3 = vec![1, 2, 3, 4, 5];
+
+    //first method using index only
+    let third: &i32 = &v3[2];
+    println!("the third element in the vector is: {}", third);
+
+    //second method using get. this will not panic if we try accessing a value at an index that does not exist
+    let third1:Option<&i32> = v3.get(2);
+    match third1 {
+        Some(third1) => println!("the third value accessed by get is: {}", third1),
+        None => println!("no value found at index 3"),
+    }
+
+
 }
