@@ -1,29 +1,50 @@
 fn main() {
-    //iterating over an immutable vector
-    let v0 = vec![100, 73, 32];
+    let mut s = String::new();
 
-    for i in &v0 {
-     println!("{}",&i);
-    }
+    let data = "initial contents";
+    let s1 = data.to_string();
 
-    //iterating over a mutable vector
-    let mut v1 = vec![100, 73, 32];
-    for i in &mut v1 {
-        *i += 10;
-        println!("{}",&i);
-    }
+    let s2 = "initial contents".to_string();
 
-    /* a vector only stores values of the same type. in case we need to store values of different types,
-    we have to use an enum. the enum type will be taken as the value type in the vector as shown below */
-    #[derive(Debug)]
-    enum SpreadsheetCell {
-        Int(i32),
-        Float(f64),
-        Text(String),
-    }
+    println!("we have an empty string: {} ",s );
 
-    let row = vec![SpreadsheetCell::Int(3), SpreadsheetCell::Float(10.12), SpreadsheetCell::Text(String::from("blue"))];
+    //creating a string from a string literal
+    let s3 = String::from("initial contents");
 
-    println!("the contents of the vector that uses an enum to cover diferent data type values are: {:?}", &row);
+    //appending to a string using push_str
+    let mut s4 = String::from("foo");
+    s4.push_str("bar");
+    println!("our new string is: {}", s4);
+
+    //appending to a string using push. Push takes a single character and adds it to a string
+    let mut s5 = String::from("lo");
+    s5.push('l');
+    println!("the string with a new character is: {}", s5);
+
+    //concatenation using + operator
+    let s6 = String::from("Hello ");
+    let s7 = String::from("world!");
+    let s8 = s6 + &s7;
+    println!("{}", s8);
+
+    //concatenation using the format! Macro
+    let t1 = String::from("tic");
+    let t2 = String::from("tac");
+    let t3 = String::from("toe");
+
+    let t = t1 + "-" + &t2 + "-" + &t3;
+    println!("{}", t);
+
+
+    let tt1 = String::from("tic");
+    let tt2 = String::from("tac");
+    let tt3 = String::from("toe");
+    let tt4 = format!("{}-{}-{}", tt1, tt2, tt3);
+    println!("{}", tt4);
+
+    /* Indexing into Strings brings in issues especially for UTF-8 
+    this is because a character in a string could be taking more than one byte. 
+    This makes it hard to know where a character starts and where it ends */
+
 
 }
